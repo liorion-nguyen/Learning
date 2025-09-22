@@ -1,12 +1,16 @@
 import { StyleSheet, View } from 'react-native';
 import './global.css';
-import Login from './src/app/auth/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import StackNavigation from './src/navigations/StackNavigation';
+import { NativeBaseProvider } from 'native-base';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Login />
-    </View>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <StackNavigation />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
 
