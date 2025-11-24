@@ -1,11 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
-import { Center, Container, Heading, Button, Box, Flex } from "native-base";
-import { StyleSheet } from "react-native";
-import { useState } from "react";
-import { users } from "../../mockup/users";
-import { Alert, Button as RNButton, Text, TextInput, View } from "react-native";
-import CustomInput from "../../components/Input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { Box, Button, Container, Heading } from "native-base";
+import { useState } from "react";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Login() {
   const navigation = useNavigation<any>();
