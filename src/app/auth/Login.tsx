@@ -66,9 +66,9 @@ export default function Login() {
       <Text style={styles.signupRow}>Don't have an account? <Text style={styles.linkText} onPress={gotoSignUp}>Sign up</Text></Text>
 
       <Box style={styles.separatorRow}>
-        {/* <Box style={styles.separatorLine}></Box>
+        <Box style={styles.separatorLine}></Box>
         <Text style={styles.separatorText}>Or login with</Text>
-        <Box style={styles.separatorLine} /> */}
+        <Box style={styles.separatorLine} />
       </Box>
 
       <Box style={styles.socialRow}>
