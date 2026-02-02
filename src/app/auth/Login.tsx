@@ -3,14 +3,30 @@ import { useNavigation } from "@react-navigation/native";
 import { Box, Button, Container, Heading } from "native-base";
 import { useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/slices/auth";
 
 export default function Login() {
   const navigation = useNavigation<any>();
+  const dispatch = useDispatch();
   const gotoSignUp = () => {
     navigation.navigate("SignUp");
   };
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  async function getUserInfo(access_token: string) {
+    const data = await fetch("https://nestjs-lms-production.up.railway.app/users/me", {
+      "headers": {
+        "content-type": "application/json",
+        "x-tenant-id": "THINKLAB",
+        "authorization": `Bearer ${access_token}`,
+      },
+      "method": "GET",
+    });
+    const user = await data.json();
+    return user;
+  }
+
   async function goToHome() {
     const data = await fetch("https://nestjs-lms-production.up.railway.app/auth/sign-in", {
       "headers": {
@@ -23,6 +39,8 @@ export default function Login() {
     const user = await data.json();
 
     if (user.access_token) {
+      const userInfo = await getUserInfo(user.access_token);
+      dispatch(setUser(userInfo));
       await AsyncStorage.setItem("user", JSON.stringify(user));
       Alert.alert("Login Successful", `Welcome back, ${user.fullName}!`);
       navigation.navigate("Home");
